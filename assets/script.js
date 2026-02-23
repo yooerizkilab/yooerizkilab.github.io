@@ -1,155 +1,243 @@
-async function maubucin(){
-    await swals.fire({
-        title: 
-                '<strong>Mau bikin Script HTML Bucin seperti ini?</strong>',
-        html:
-                'Lihat tutorialnya di: ' +
-                '<a href="https://youtu.be/FtFSAzrpFNc">Klik di Sini!</a> ' +
-                '<br><br>' + 'Bisa diedit kata-kata sesukamu!',
-        focusConfirm: false,
+/* ═══════════════════════════════════════════
+   PORTFOLIO — Mukhammad Rizki Romadlon
+   script.js
+═══════════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ─────────────────────────────────────────
+     1. AOS — Animate On Scroll
+  ───────────────────────────────────────── */
+  AOS.init({
+    duration: 700,
+    once: true,
+    easing: 'ease-out-cubic',
+    offset: 60,
+  });
+
+
+  /* ─────────────────────────────────────────
+     2. Typed.js — Hero typing effect
+  ───────────────────────────────────────── */
+  new Typed('#typed-text', {
+    strings: [
+      'Junior Software Engineer',
+      'Frontend Developer',
+      'Backend Developer',
+      'Problem Solver',
+      'Code Enthusiast',
+    ],
+    typeSpeed: 60,
+    backSpeed: 38,
+    loop: true,
+    backDelay: 1800,
+    smartBackspace: true,
+  });
+
+
+  /* ─────────────────────────────────────────
+     3. Particles.js — Background particles
+  ───────────────────────────────────────── */
+  // Reduce particle count on mobile for performance
+  const isMobile = window.innerWidth < 768;
+
+  particlesJS('particles-js', {
+    particles: {
+      number: {
+        value: isMobile ? 28 : 55,
+        density: { enable: true, value_area: 900 },
+      },
+      color: { value: '#6ee7b7' },
+      shape: { type: 'circle' },
+      opacity: {
+        value: 0.18,
+        random: true,
+        anim: { enable: false },
+      },
+      size: {
+        value: isMobile ? 1.5 : 2,
+        random: true,
+      },
+      line_linked: {
+        enable: true,
+        distance: 140,
+        color: '#6ee7b7',
+        opacity: 0.07,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 0.75,
+        direction: 'none',
+        random: true,
+        straight: false,
+        out_mode: 'out',
+        bounce: false,
+      },
+    },
+    interactivity: {
+      detect_on: 'window',
+      events: {
+        onhover: { enable: !isMobile, mode: 'grab' },
+        onclick: { enable: true, mode: 'push' },
+        resize: true,
+      },
+      modes: {
+        grab: {
+          distance: 140,
+          line_linked: { opacity: 0.25 },
+        },
+        push: { particles_nb: isMobile ? 1 : 3 },
+      },
+    },
+    retina_detect: true,
+  });
+
+
+  /* ─────────────────────────────────────────
+     4. Cursor Glow (desktop only)
+  ───────────────────────────────────────── */
+  const glow = document.getElementById('cursorGlow');
+
+  if (window.matchMedia('(hover: hover)').matches && glow) {
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
-}
 
-function tunjukkan(){
-    document.getElementById("sticky-ad").style = "bottom: 0px";
-}
+    // Smooth cursor following
+    const animateGlow = () => {
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      glow.style.left = glowX + 'px';
+      glow.style.top  = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    };
+    animateGlow();
+  }
 
-function hilangkan(){
-    document.getElementById("sticky-ad").style = "bottom: -130px";
-}
 
-function showDiv(){
-    Content.style = "opacity:1;margin-top:15vh;";
-    ket.style="margin-top:30px";
-}
+  /* ─────────────────────────────────────────
+     5. Navbar — scroll effect & active link
+  ───────────────────────────────────────── */
+  const navbar   = document.getElementById('navbar');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
 
-function memulai(){
-    suratin.style="transition:all 1s ease;transform:scale(.1);opacity:0";
-    ket.style="transition:all 1s ease;transform:scale(.1);opacity:0";
-    setTimeout(pesan,300)
-}
+  const updateNav = () => {
+    // Scrolled class for background
+    if (window.scrollY > 20) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
 
-function kpemb() {
-    suratin.style="display:none";ket.style="display:none";
-    fotoakhir.style="display:inline-flex;transform:scale(1);";
-    Content.style = "opacity:1;margin-top:2vh;";
-    bq.style = "opacity:1;visibility:visible;margin-top:5px";
-    setTimeout(ngetik,500)
-}
-  
-function tombol(){
-    Tombol.style="margin-top:15px;opacity:1;transform: scale(1);";
-    ftom=1;
-} ftom=0; 
+    // Active link highlight
+    let current = '';
+    sections.forEach((sec) => {
+      const sectionTop = sec.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = sec.getAttribute('id');
+      }
+    });
 
-function fakhiran(){
-    document.getElementById("akhiran").style = "display:inline-flex";
-}
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  };
 
-const swals = Swal.mixin({
-    allowOutsideClick: false, 
-    cancelButtonColor: '#FF0040',
-    imageWidth: 100,
-    imageHeight: 100,
-}); 
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav(); // run once on load
 
-const swalst = Swal.mixin({
-    allowOutsideClick: false,
-    showConfirmButton: false,
-    timer: 2500,
-    timerProgressBar: true,
-    imageWidth: 100,
-    imageHeight: 100,
+
+  /* ─────────────────────────────────────────
+     6. Hamburger Menu (mobile)
+  ───────────────────────────────────────── */
+  const hamburger  = document.getElementById('hamburger');
+  const navMenu    = document.getElementById('navLinks');
+  const navOverlay = document.getElementById('navOverlay');
+
+  const openMenu = () => {
+    hamburger.classList.add('open');
+    navMenu.classList.add('open');
+    navOverlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger.classList.remove('open');
+    navMenu.classList.remove('open');
+    navOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  };
+
+  hamburger.addEventListener('click', () => {
+    if (hamburger.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close on overlay click
+  navOverlay.addEventListener('click', closeMenu);
+
+  // Close on nav link click
+  navLinks.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+
+  /* ─────────────────────────────────────────
+     7. Smooth scroll offset (fixed nav)
+  ───────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const navHeight = navbar.offsetHeight;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    });
+  });
+
+
+  /* ─────────────────────────────────────────
+     8. Skill card — tilt on hover (desktop)
+  ───────────────────────────────────────── */
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.skill-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 10;
+        const y = ((e.clientY - rect.top)  / rect.height - 0.5) * -10;
+        card.style.transform = `translateY(-4px) perspective(400px) rotateX(${y}deg) rotateY(${x}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+
+  /* ─────────────────────────────────────────
+     9. Back to top on logo click
+  ───────────────────────────────────────── */
+  document.querySelector('.nav-logo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
 });
-
-const style = document.createElement('style');
-
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-today = dd + ' ' + monthNames[today.getMonth()] + ' ' + yyyy;
-
-function setel(){
-    audio.play();
-}
-
-function setel2(){
-    bgm.play();
-}
-
-function sjawab(){
-    if(ftom==1){
-        Tombol.style="display:none";jawab();
-    }
-}
-  
-var aa=0,katangetik;
-
-function ngetik(){
-    if(aa<katangetik.length){
-        kalimat.innerHTML += katangetik.charAt(aa);aa++;setTimeout(ngetik,80);
-    } if(aa==katangetik.length){
-        kalimatc.style="margin-top:30px;margin-bottom:10px";setTimeout(ngetik2,500);
-    }
-}
-
-var ai=0,katangetik2;
-
-function ngetik2(){
-    if(ai<katangetik2.length){
-        kalimatc.innerHTML += katangetik2.charAt(ai);ai++;setTimeout(ngetik2,150);
-    } if(ai==katangetik2.length){
-        setTimeout(tombol,300);setTimeout(tunjukkan,2200);
-    }
-}
-
-// For WhatsApp
-async function jawab(){
-    await swals.fire('Kirim pesan ke WhatsApp aku, ya...!');
-    window.location = "https://wa.me/62895341341001?text=" + pesanwhatsapp;
-}
-
-// For Secreto
-// async function jawab(){
-//     await swals.fire('Isi Secreto ku yaa! 😉');
-//     window.location = "https://secreto.site/aauki5";
-// }
-
-async function pertama(){
-    audio = new Audio('https://feeldreams.github.io/almostday.mp3');
-    setTimeout(showDiv,100);
-}
-
-pertama();
-       
-async function pesan(){
-    await swalst.fire({
-        title: 'Hai Kamu 🥰', 
-        imageUrl: 'https://i.ibb.co/4VBkZwn/bunga.gif',
-    });   	
-        await swalst.fire({
-        title: 'Semangat Jalani Harinya yaaa! 🤩',
-        imageUrl: 'https://feeldreams.github.io/mndkat.gif',
-    });
-        await swalst.fire({
-        title: 'Jaga Kesehatanmu! 😍',
-        imageUrl: 'https://i.ibb.co/xGc2wBh/cartoons.gif',
-    });
-        await swalst.fire({
-        title: 'Jangan Sampe Sakit! 😡',
-        imageUrl: 'https://i.ibb.co/hBJWz6S/tinju.gif',
-    });
-
-    await swalst.fire({
-        title: 'Aku Sayangkamu! 😘',
-        imageUrl: 'https://feeldreams.github.io/peach12.gif',
-    });
-                  
-    katangetik = "Makasih udah mau bukain yaaaa ><     ";
-    katangetik2 = "❤️❤️❤️❤️❤️❤️ I LOVE YOU ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️";
-                  
-    pesanwhatsapp = "Hi kenalan yuk.....";
-    setTimeout(kpemb,300);
-}
